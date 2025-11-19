@@ -1,0 +1,16 @@
+services:
+  mm-bid-ask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mm-bid-ask:latest
+    container_name: mm-bid-ask
+    environment:
+      LIGHTER_SIGNER_DLL: ${LIGHTER_SIGNER_DLL:-/app/signer-amd64.so}
+      LIGHTER_API_KEY_PRIVATE: ${LIGHTER_API_KEY_PRIVATE}
+      LIGHTER_API_KEY_INDEX: ${LIGHTER_API_KEY_INDEX}
+      LIGHTER_ACCOUNT_INDEX: ${LIGHTER_ACCOUNT_INDEX}
+      LD_LIBRARY_PATH: /app
+    tty: true
+    stdin_open: true
+    command: ["./build/MM-BID-ASK"]
